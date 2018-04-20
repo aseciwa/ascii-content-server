@@ -47,3 +47,13 @@ where
 //	   a.getRValue().getExplicitlyConverted().getType().getUnderlyingType()
 select access, "Passed-by-ref" ,call
 //, call , c
+
+
+Semmle is a software engineering analytics and code exploration provider that offers a way to creates knowledge base of all available data about the software development process (i.e. source code) and allows analyst to accurately and efficiently query the knowledge base. 
+
+Semmle Core 
+The Semmle code analysis works by monitoring the build process of compile languages by listening to system calls, and detects calls to the compiler. The user needs to make their normal build commands available for monitoring. During this phase of interception every source file in the source code is put up against an *“extractor” that converts the source to a relational representation, which is called a “trap” file. The advantage of this approach, the extractor has all the information about the compiler such as the class paths to bind symbols to their definition accurately. 
+When the data collection is complete, the extractor takes all the trap files and imports them into a database which represents the program. Once this is complete, the extractor creates a snapshot containing a database and a copy of each source file analyzed. Then an analyst can use Semmle QL to query the database. 
+
+*There is one extractor for each supported language and this is need for accuracy to take into account that languages can be vastly different and require different processing. 
+
