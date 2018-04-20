@@ -1,0 +1,49 @@
+mport cpp
+import semmle.code.cpp.security.TaintTracking
+
+/*
+from FunctionCall call, Function func
+where
+	call.getTarget() = func
+select call
+*/
+/*
+from AddressOfExpr addr, VariableAccess access,
+	FunctionCall call, Function func
+where
+	access =  addr.getOperand() and 
+	call.getTarget() = func
+select func
+*/
+/*
+predicate passedByReference(int i, Variable va) 
+{
+  
+}
+
+//access = addr.getOperand() and
+	//call.getTarget().getQualifiedName() = "cgc_receive_fixed" and 
+
+*/
+
+from FunctionCall call, Function func, 
+	AddressOfExpr addr, VariableAccess access,
+	Variable var, Type tpe, Cast c, AssignExpr a
+	
+where
+	// what is our source? 
+	call.passesByReference(0, access) and
+	access = addr.getOperand() and
+
+	//what is our sink? 
+	c.getType() instanceof CharPointerType 
+	
+	
+
+	//call.getTarget().getQualifiedName() = "cgc_received_fixed" //and
+
+
+//select a, a.getLValue().getExplicitlyConverted().getType().getUnderlyingType(),
+//	   a.getRValue().getExplicitlyConverted().getType().getUnderlyingType()
+select access, "Passed-by-ref" ,call
+//, call , c
